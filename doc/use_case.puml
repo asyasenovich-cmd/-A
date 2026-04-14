@@ -1,35 +1,31 @@
 @startuml
 left to right direction
 
-actor "Дед" as Grandpa
-actor "Баба" as Grandma
-actor "Мышь" as Mouse
-actor "Курочка" as Chicken
+actor "Иван" as Ivan
+actor "Конёк Горбунок" as Horse
+actor "Царь" as King
 
-package "Управление золотыми активами" {
-  usecase "Бить золотое яйцо" as Hit
-  usecase "Разбить (случайно)" as BreakByTail
-  usecase "Плакать" as Cry
-  usecase "Утешить (Обещать простое)" as Comfort
-  usecase "Снести простое яйцо" as SpawnSimple
+package "Многоуровневые испытания" {
+  usecase "Искупаться в котлах" as Bath
+  usecase "Призвать Конька" as Call
+  usecase "Наложить защиту" as Protect
+  usecase "Стать царём" as BecomeKing
 }
 
-' Дед и Баба бьют яйцо (действие)
-Grandpa --> Hit
-Grandma --> Hit
+' Иван купается в котлах (действие)
+Ivan --> Bath
 
-' Мышь разбивает (действие)
-Mouse --> BreakByTail
+' Иван призывает Конька (действие)
+Ivan --> Call
 
-' Дед и Баба ПЛАЧУТ (линии ведут к ним)
-Grandpa --> Cry
-Grandma --> Cry
+' Конёк накладывает защиту (действие)
+Horse --> Protect
 
-' Курочка УТЕШАЕТ и СНОСИТ (линии к ней)
-Chicken --> Comfort
-Chicken --> SpawnSimple
+' Царь наблюдает за результатом (действие)
+King --> BecomeKing
 
 ' Зависимости внутри системы
-Cry <.. Comfort : <<extend>> : если плачут
-Comfort ..> SpawnSimple : <<include>>
+Bath ..> Call : <<include>>
+Call ..> Protect : <<include>>
+BecomeKing <.. Bath : <<extend>> : если все испытания пройдены
 @enduml
